@@ -124,7 +124,6 @@ EOT
 
 echo "Aliase definiert in ~/.zshrc. Lade Zsh neu mit 'source ~/.zshrc'."
 
-zsh
 source ~/.zshrc  # Lade die neue Konfiguration
 echo "Setup abgeschlossen! Starte eine neue Shell oder 'source ~/.zshrc' für Änderungen."
 echo "Tipp: Für Agnoster-Theme installiere Powerline-Fonts in deinem Windows-Terminal (z.B. Cascadia Code PL)."
