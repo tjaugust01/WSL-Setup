@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/bashu
 # This script sets up the environment for the project
 set -e
 SETUP_DIR=$(dirname "$0")
@@ -11,35 +10,14 @@ echo "Installing necessary packages..."
 sudo dnf install -y zsh git curl wget unzip tar make gcc gcc-c++ python3-pip
 
 # ZSH setup
-
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  # Clone das Repo
-  git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh --depth=1
-  
-  # Kopiere die Standard-Template für .zshrc (falls keine existiert)
-  if [ ! -f "$HOME/.zshrc" ]; then
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  fi
-  
-  # Setze ZSH-Variable in .zshrc
-  echo 'export ZSH="$HOME/.oh-my-zsh"' >> ~/.zshrc
-  
-  echo "Oh My Zsh manuell installiert."
-else
+  RUNZSH = no
+  CHSH = no
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+  echo "Oh My Zsh installiert (unattended)."
+  else
   echo "Oh My Zsh bereits installiert – überspringe."
 fi
-
-# Manuell die Default-Shell auf Zsh setzen, falls nötig (ohne Unterbrechung)
-CURRENT_SHELL=$(getent passwd $USER | cut -d: -f7)
-ZSH_PATH=$(which zsh)
-
-if [ "$CURRENT_SHELL" != "$ZSH_PATH" ]; then
-  chsh -s "$ZSH_PATH"
-  echo "Default-Shell auf Zsh geändert. Starte eine neue Session, um es zu aktivieren."
-else
-  echo "Default-Shell ist bereits Zsh – überspringe."
-fi
-
 sed -i 's/plugins=(git)/plugins=(git npm yarn python pip golang rust docker)/' ~/.zshrc
 
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc
