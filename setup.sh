@@ -15,15 +15,15 @@ sudo dnf install -y zsh git curl wget unzip tar make gcc gcc-c++ python3-pip
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   # Clone das Repo
   git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh --depth=1
-  
+
   # Kopiere die Standard-Template für .zshrc (falls keine existiert)
   if [ ! -f "$HOME/.zshrc" ]; then
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
   fi
-  
+
   # Setze ZSH-Variable in .zshrc
   echo 'export ZSH="$HOME/.oh-my-zsh"' >> ~/.zshrc
-  
+
   echo "Oh My Zsh manuell installiert."
 else
   echo "Oh My Zsh bereits installiert – überspringe."
