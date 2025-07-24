@@ -9,13 +9,13 @@ sudo dnf update -y
 echo "Installing necessary packages..."
 sudo dnf install -y zsh git curl wget unzip tar make gcc gcc-c++ python3-pip
 
-# ZSH setup
+ ZSH setup
+
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  RUNZSH = no
-  CHSH = no
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+  # Unattended-Modus: Keine Shell-Änderung, kein automatischer Zsh-Start
+  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
   echo "Oh My Zsh installiert (unattended)."
-  else
+else
   echo "Oh My Zsh bereits installiert – überspringe."
 fi
 sed -i 's/plugins=(git)/plugins=(git npm yarn python pip golang rust docker)/' ~/.zshrc
@@ -25,6 +25,7 @@ sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc
 sudo dnf install -y powerline-fonts
 
 echo "Oh My Zsh customisiert (Plugins: git, npm, yarn, python, pip, golang, rust, docker; Theme: Agnoster)."
+
 
 CUSTOM_THEME="$SETUP_DIR/agnoster.zsh-theme"
 TARGET_THEME="$HOME/.oh-my-zsh/themes/agnoster.zsh-theme"
